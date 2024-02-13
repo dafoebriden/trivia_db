@@ -5,7 +5,10 @@ export class Trivia {
         this.category = data.category
         this.question = data.question
         this.correctAnswer = data.correct_answer
-        this.incorrectAnswers = data.incorrect_answers
+        this.options = [...data.incorrect_answers, data.correct_answer]
+
+        this.options = this.options.sort(() => Math.random() - 0.5)
+
     }
 
     get TriviaHTMLTemplate() {
@@ -22,20 +25,16 @@ export class Trivia {
             <h4 class="mb-2">Question:</h4>
             <p class="m-0 p-2">${this.question}</p>
         </div>
-        ${this.eachAnswer}
         ${this.allAnswers}
     </div>
     `
     }
-    get eachAnswer() {
-        return this.incorrectAnswers.splice(1, 0, 'wierdo')
-    }
     get allAnswers() {
-        return this.eachAnswer.map(answer => {
+        return this.options.map(answer => {
             return `
-            <div onclick="app.TriviaController.submitAnswer()" class="col-3 text-center bg-light border border-primary border-3 rounded fw-bold m-2" type="button">
-                <p class="m-0 p-2">${this.eachAnswer}</p>
+            <div onclick="app.TriviaController.submitAnswer('${answer}')" class="col-3 text-center bg-light border border-primary border-3 rounded fw-bold m-2" type="button">
+                <p class="m-0 p-2">${answer}</p>
             </div>
-            `   })
+            `   }).join('')
     }
 }

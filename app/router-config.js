@@ -1,11 +1,11 @@
-import { triviaController } from "./controllers/TriviaController.js";
+import { TriviaController } from "./controllers/TriviaController.js";
 import { Router } from "./utils/Router.js";
 
 
 export const router = new Router([
   {
     path: '',
-    controllers: [triviaController],
+    controllers: [TriviaController],
     view: ``
 
   }

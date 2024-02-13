@@ -4,18 +4,20 @@ import { Pop } from "../utils/Pop.js"
 import { setHTML } from "../utils/Writer.js";
 
 
-function _drawTrivia() {
-    const trivias = AppState.trivias
-    let htmlString = ''
-    trivias.forEach(trivia => htmlString = trivia.TriviaHTMLTemplate)
+function _drawQuestion() {
+    const question = AppState.activeQuestion
+    if (!question) {
+        return setHTML('triviaGame', 'game over')
+    }
+    let htmlString = question.TriviaHTMLTemplate
     setHTML('triviaGame', htmlString)
 }
 
 
-export class triviaController {
+export class TriviaController {
     constructor() {
         this.getTrivias()
-        AppState.on('trivias', _drawTrivia)
+        AppState.on('activeQuestion', _drawQuestion)
     }
     async getTrivias() {
         try {
@@ -26,6 +28,15 @@ export class triviaController {
             console.error(error)
         }
     }
+
+    submitAnswer(answer) {
+        console.log(answer, AppState.trivias);
+
+        trivasService.submitAnswer(answer)
+
+
+    }
+
 }
 
 
