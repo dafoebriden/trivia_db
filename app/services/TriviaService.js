@@ -1,4 +1,6 @@
 import { AppState } from "../AppState.js"
+import { Trivia } from "../models/Trivia.js"
+import { triviaApi } from "./AxiosService.js"
 
 
 

@@ -1,20 +1,21 @@
 import { AppState } from "../AppState.js"
 import { trivasService } from "../services/TriviaService.js"
 import { Pop } from "../utils/Pop.js"
+import { setHTML } from "../utils/Writer.js";
 
 
-function _drawTrivias() {
+function _drawTrivia() {
     const trivias = AppState.trivias
     let htmlString = ''
-    trivias.forEach(trivia => htmlString += trivia.TriviaHTMLTemplate)
+    trivias.forEach(trivia => htmlString = trivia.TriviaHTMLTemplate)
+    setHTML('triviaGame', htmlString)
 }
 
 
 export class triviaController {
     constructor() {
-        console.log('saying hello from the constructor')
         this.getTrivias()
-        AppState.on('trivias', _drawTrivias)
+        AppState.on('trivias', _drawTrivia)
     }
     async getTrivias() {
         try {

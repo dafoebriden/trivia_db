@@ -1,4 +1,6 @@
+
+// @ts-ignore
 export const triviaApi = axios.create({
-    baseUrl: 'https://opentdb.com',
+    baseURL: 'https://opentdb.com',
     timeout: 5000
 })
